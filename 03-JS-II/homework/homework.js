@@ -126,16 +126,33 @@ function operadoresLogicos(num1, num2, num3) {
   //Si num3 es más grande que num1 y num2, aumentar su valor en 1 y retornar el nuevo valor.
   //0 no es ni positivo ni negativo. Si alguno de los argumentos es 0, retornar "Error".
   //Si no se cumplen ninguna de las condiciones anteriores, retornar false. 
-  if (num1 > num2 && num1 > num3 && num1 > 0) {
-    return "Número 1 es mayor y positivo";
+
+  if (Object.values(arguments).reduce((acc, x) => acc || x === 0, false)) {
+    return "Error";
   };
+
+  if (num3 > num1 && num3 > num2) {
+    return num3 + 1;
+  };
+  
   if (num1 < 0 || num2 < 0 || num3 < 0){
     return "Hay negativos";
   };
+  
+  // Alternativa usando reduce (más flexible):
+  // if (Object.values(arguments).reduce((acc, x) => acc || x < 0, false)) {
+  //   return "Hay negativos"
+  // };
+  
+  if (num1 > num2 && num1 > num3 && num1 > 0) {
+    return "Número 1 es mayor y positivo";
+  };
 
-}
-
-function esPrimo(numero) {
+  return false;
+    
+  }
+  
+  function esPrimo(numero) {
   // Devuelve "true" si "numero" es primo
   // De lo contrario devuelve "falso"
   // Pista: un número primo solo es divisible por sí mismo y por 1
@@ -154,19 +171,39 @@ function esVerdadero(valor){
   //Escribe una función que reciba un valor booleano y retorne “Soy verdadero” 
   //si su valor es true y “Soy falso” si su valor es false.
   //Escribe tu código aquí
-
+  return valor ? "Soy verdadero" : "Soy falso";
 }
 
 function tablaDelSeis(){
   //Escribe una función que muestre la tabla de multiplicar del 6 (del 0 al 60).
   //La función devuelve un array con los resultados de la tabla de multiplicar del 6 en orden creciente.
-  //Escribe tu código aquí   
-  
+  //Escribe tu código aquí 
+
+  let arrayTabla = [];
+  for (let i = 0; i <= 10; i++) {
+    arrayTabla.push(i * 6);    
+  }
+  return arrayTabla;
+
+  // Alternativa flexible usando map:
+  //
+  // function tablaDeMultiplicar(primerFactor, ultimoFactor, numero) {
+  //   let arrayFactores = [];
+  //
+  //   for (let i = primerFactor; i <= ultimoFactor; i++) {arrayFactores.push(i)};
+  //
+  //   return arrayFactores.map(x => x * numero);
+  // };
+  //
+  // return tablaDeMultiplicar(0, 10, 6);
+
 }
 
 function tieneTresDigitos(numero){
   //Leer un número entero y retornar true si tiene 3 dígitos. Caso contrario, retorna false.
   //Escribe tu código aquí
+  let resultado = numero / 100;
+  return resultado < 10 && resultado >= 1;
   
 }
 
@@ -174,6 +211,12 @@ function doWhile(numero) {
   //Implementar una función tal que vaya aumentando el valor recibido en 5 hasta un límite de 8 veces
   //Retornar el valor final.
   //Usar el bucle do ... while.
+  let count = 0;
+  do {
+    numero += 5;
+    count += 1;
+  } while (count < 8);
+  return numero;
 }
 
 
